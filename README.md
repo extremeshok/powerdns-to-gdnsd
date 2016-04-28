@@ -1,8 +1,3 @@
-# powerdns-to-gdnsd
-Imports all domains/zones from PowerDNS and generates gdnsd zonefiles
-
-# Testing generated templates: gdnsd -fDSs -c /etc/gdnsd start
-
 # powerdns-to-gdnsd [![Build Status](https://travis-ci.org/extremeshok/powerdns-to-gdnsd.svg?branch=master)](https://travis-ci.org/extremeshok/powerdns-to-gdnsd) [![GitHub Release](https://img.shields.io/github/release/extremeshok/powerdns-to-gdnsd.svg?label=Latest)](https://github.com/extremeshok/powerdns-to-gdnsd/releases/latest)
 
 [![Code Climate](https://codeclimate.com/github/extremeshok/powerdns-to-gdnsd/badges/gpa.svg)](https://codeclimate.com/github/extremeshok/powerdns-to-gdnsd)
@@ -42,8 +37,9 @@ Please post them on the issue tracker : https://github.com/extremeshok/powerdns-
 * Specifying a config on the command line (-c | --config) will override the loading of the default configs
 
 #### Check if signature are being loaded
-**Run the following command to display any errors with the generated zonefiles
+* Run the following command to display any errors with the generated zonefiles
 * assumes the generated zonefiles have been copied to /etc/gdnsd/zones
+
 ```gdnsd -fDSs -c /etc/gdnsd checkconf```
 
 ## Change Log
