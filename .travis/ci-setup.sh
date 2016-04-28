@@ -37,7 +37,7 @@ else
 fi
 
 echo "Testing database is correctly configured"
-myresult="$(mysql --user=powerdns --password="8wksjehkaj" --database=powerdns --skip-column-name -e "SELECT name FROM domains WHERE name='example.com' ")"
+myresult="$(mysql --user=powerdns --password="8wksjehkaj" --database=powerdns --skip-column-names -e "SELECT name FROM domains WHERE name='example.com' ")"
 if [ "$myresult" = "example.com" ] ; then
   echo "Success"
 else

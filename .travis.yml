@@ -4,9 +4,7 @@
 sudo: required
 dist: trusty
 
-# Apparently caching is disabled, since we used modern build platform as we require clamav and sudo ;/
-# caching the /var/lib/clamav/ will save +/-9mins of run time and allow the use of freshclam signatures
-
+# Apparently caching is disabled, since we used modern build platform
 #Enable Caching
 #cache:
 #  directories:
@@ -24,10 +22,9 @@ before_install:
 
 
 install:
+  - "sudo sh -e .travis/ci-setup.sh"
   - "sudo mkdir -p /etc/powerdns/pdns.d"
   - "sudo cp -f .travis/tests/powerdns/gmysql.conf /etc/powerdns/pdns.d/pdns.local.gmysql.conf"
-  - "sudo sh -e .travis/ci-setup.sh"
-
 
 script:
   - "sudo sh -e .travis/ci-test.sh"

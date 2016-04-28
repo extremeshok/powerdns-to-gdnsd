@@ -46,7 +46,11 @@ Please post them on the issue tracker : https://github.com/extremeshok/powerdns-
 
 ### Version 2.0.0
  - eXtremeSHOK.com Maintenance
+ - Refactored for Public Releas
  - Added travis-ci.org code testing
+
+### Version 1.x.x
+ - eXtremeSHOK.com Internal
 
 ## USAGE
 
