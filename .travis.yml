@@ -13,11 +13,13 @@ dist: trusty
 #    - tmp/cache
 
 before_install:
-  - "sudo apt-get update -qq"
-  - "sudo apt-get install mysql-server -qq"
+	-	"sudo add-apt-repository ppa:gdnsd -y"
+  - "sudo apt-get -qq update"
+  - "sudo apt-get -y install gcc-4.8"
+  - "sudo apt-get install -y mysql-server"
   - "sudo service mysql restart"
   #- "sudo apt-get install pdns-server pdns-backend-mysql -y -qq"
-  - "sudo apt-get install gdnsd -qq"
+  #- sudo apt-get update -q
   #- "sudo service gdnsd start"
 
 install:
