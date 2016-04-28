@@ -30,15 +30,15 @@ Please post them on the issue tracker : https://github.com/extremeshok/powerdns-
 ### First Usage
 * Run the script as your superuser, MySQL settings are automatically detected from the powerdns configs
 
-### Advanced Config Overrides
+### Config Files and Detected Settings
 * Default configs are loaded in the following order if they exist:
 * /etc/pdns/pdns.conf -> /etc/pdns/conf.d/gmysql.conf
 * A minimum of 1 config is required.
 * Specifying a config on the command line (-c | --config) will override the loading of the default configs
 
-#### Check if signature are being loaded
-* Run the following command to display any errors with the generated zonefiles
-* assumes the generated zonefiles have been copied to /etc/gdnsd/zones
+#### Testing generated zonefiles
+* Run the following command to display any errors with the generated zonefiles 
+* assumes gdnsd is installed and the generated zonefiles have been copied to /etc/gdnsd/zones
 
 ```gdnsd -fDSs -c /etc/gdnsd checkconf```
 
