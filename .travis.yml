@@ -15,7 +15,7 @@ dist: trusty
 before_install:
   - "sudo apt-get update -y -qq"
   - "sudo apt-get install mysql-server -y -qq"
-  - "sudo service mysql start"
+  - "sudo service mysql restart"
   #- "sudo apt-get install pdns-server pdns-backend-mysql -y -qq"
   - "sudo apt-get install gdnsd -y -qq"
   #- "sudo service gdnsd start"
