@@ -7,11 +7,12 @@ export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/usr/lo
 # exit 0
 
 #run the script
-if bash powerdns-to-gdnsd.sh --output /tmp/export ; then
-	echo .. OK
+bash powerdns-to-gdnsd.sh --output /tmp/export
+if [ "$?" -eq 0 ] ; then
+    echo "Success"
 else
- 	echo .. ERROR
-  exit 1
+    echo "Error"
+    exit 1
 fi
 
 #check zonefile generation
@@ -21,3 +22,7 @@ else
 	echo .. ERROR
 	exit 1
 fi
+
+#temp to grab the zonefile
+cat /tmp/export/example.com
+
