@@ -9,7 +9,7 @@ PowerDNS to gdnsd domain/zone Migrator
 ## Maintained and provided by https://eXtremeSHOK.com
 
 ## Description
-The powerdns-to-gdnsd script provides a simple way to export all your domains/zones from PowerDNS into gdnsd. The script will test and generate correct gdnsd zonefiles. The zonefiles can be used directly with gdnsd without needing any changes. There are various tests to ensure the generated zonefiles are valid and minor issues will be fixes automatically. The script will attempt to load the powerdns configs to automatically configure itself to be able to fetch the domain/zone records from the database.
+The powerdns-to-gdnsd script provides a simple way to export all your domains/zones from PowerDNS into gdnsd. The script will test and generate correct gdnsd zonefiles. The zonefiles can be used directly with gdnsd without needing any changes. There are various tests to ensure the generated zonefiles are valid and minor issues will be fixes automatically. The script will attempt to load the powerdns configs to automatically configure itself to be able to fetch the domain/zone records from the database. Due to gdnsd not supporting dnssec as well as some obselete and non-standard record types, they we will be automatically disabled. The script will also disable any invalid records. 
 
 ## Assumptions
 PowerDNS server (pdns-server) using backend MySQL (dns-backend-mysql / gmysqlbackend) with the standard scheme (table names and columns) : https://raw.githubusercontent.com/PowerDNS/pdns/master/modules/gmysqlbackend/schema.mysql.sql

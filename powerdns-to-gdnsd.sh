@@ -67,7 +67,7 @@ disable_not_implemented_records="YES" #set to NO to disable
 # Records that need to be disabled due to dnssec or not implemented
 # According to: https://github.com/gdnsd/gdnsd/blob/master/t/Net/DNS.pm
 dnssec_record_types=("SIG" "KEY" "NXT" "DS" "RRSIG" "NSEC" "DNSKEY" "DLV")
-not_implemented_record_types=("MD" "MF" "WKS" "NSAP_PTR" "GPOS" "ATMA" "A6" "SINK" "NINFO" "RKEY" "TA")
+not_implemented_record_types=("MD" "MF" "WKS" "NSAP_PTR" "GPOS" "ATMA" "A6" "SINK" "NINFO" "RKEY" "TA" "LOC" "HINFO" "EUI64" "EUI48" "TYPE65534")
 
 # Shortens the record names by removing the domain name from them
 # This enhances the readability of your templates
