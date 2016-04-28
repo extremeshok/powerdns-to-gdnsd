@@ -1,0 +1,29 @@
+#language: shell
+
+#Enable modern build platform, not container based.
+sudo: required
+dist: trusty
+
+# Apparently caching is disabled, since we used modern build platform as we require clamav and sudo ;/
+# caching the /var/lib/clamav/ will save +/-9mins of run time and allow the use of freshclam signatures
+
+#Enable Caching
+#cache:
+#  directories:
+#    - tmp/cache
+
+before_install:
+  - "sudo apt-get update -qq"
+  - "sudo apt-get install gdnsd -qq"
+  #- "sudo service gdnsd start"
+
+install:
+  - "sudo mkdir -p /etc/pdns/conf.d"
+  - "sudo cp -f .travis/tests/gmysql.conf /etc/pdns/conf.d/gmysql.conf"
+
+script:
+  - sudo sh -e .travis/ci-test.sh
+
+#addons:
+#  code_climate:
+#    repo_token: 
