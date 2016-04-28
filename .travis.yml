@@ -16,11 +16,13 @@ before_install:
   - "sudo apt-get -qq update"
   - "sudo apt-get install -y mysql-server"
   - "sudo service mysql restart"
-  - "sudo cp -f /sbin/start /sbin/start.backup"
-  - "sudo cp -f .travis/tests/gdnsd/workaround_failed_start_to_install.sh /sbin/start"
-  - "sudo chmod +x /sbin/start"
+  #- "sudo cp -f /sbin/start /sbin/start.backup"
+  #- "sudo cp -f .travis/tests/gdnsd/workaround_failed_start_to_install.sh /sbin/start"
+  #- "sudo chmod +x /sbin/start"
+  - "sudo dpkg-divert --local --rename --add /sbin/initctl"
+  - "sudo ln -sf /bin/true /sbin/initctl"
   - "sudo apt-get install -y -f gdnsd libev4 liburcu1"
-  - "sudo cp -f /sbin/start.backup /sbin/start"
+  #- "sudo cp -f /sbin/start.backup /sbin/start"
   #- sudo apt-get update -q
   #- "sudo service gdnsd start"
 
