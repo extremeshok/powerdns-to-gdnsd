@@ -13,4 +13,4 @@ FLUSH PRIVILEGES;
 EOF
 
 echo "Importing the PowerDNS mysql schema"
-mysql --host=localhost --user=root --database=powerdns < "$PWD/.travis/powerdns/schema.mysql.sql"
+mysql --host=localhost --user=root --database=powerdns < ".travis/tests/powerdns/schema.mysql.sql"
