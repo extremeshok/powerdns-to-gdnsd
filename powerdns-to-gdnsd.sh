@@ -579,7 +579,7 @@ EOF
 		fi
 	
 cat << EOF >> "$output_dir/$domain_name"
-$record_name  $record_ttl  IN $record_type  $record_prio  $record_content
+$record_name  $record_ttl  IN  $record_type  $record_prio  $record_content
 EOF
 	
 	#End records
