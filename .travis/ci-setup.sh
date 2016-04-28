@@ -3,7 +3,7 @@
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/usr/local/musl/bin:$HOME/bin
 
 #save the current dir for later
-ORIG_PWD=$PWD
+#ORIG_PWD=$PWD
 
 echo "Creating the PowerDNS Database and User"
 mysql --host=localhost --user=root  << EOF
@@ -37,8 +37,8 @@ else
 fi
 
 echo "Testing database is correctly configured"
-myresult=$(mysql --user=powerdns --password="8wksjehkaj" --database=powerdns --skip-column-name -e "SELECT name FROM domains WHERE name='example.com' ")
-if [ "$myresult" == "example.com" ] ; then
+myresult="$(mysql --user=powerdns --password="8wksjehkaj" --database=powerdns --skip-column-name -e "SELECT name FROM domains WHERE name='example.com' ")"
+if [ "$myresult" = "example.com" ] ; then
   echo "Success"
 else
   echo "Error"
