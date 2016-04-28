@@ -44,6 +44,12 @@ Please post them on the issue tracker : https://github.com/extremeshok/powerdns-
 
 ## Change Log
 
+### Version 2.1.0 ( 29 April 2016 )
+ - eXtremeSHOK.com Maintenance
+ - Added function xshok_is_in_array to check if a string is in an array
+ - Added option to disable dnssec records
+ - Added option to disable not implemented records
+
 ### Version 2.0.0
  - eXtremeSHOK.com Maintenance
  - Refactored for Public Releas

@@ -36,14 +36,14 @@ records_table="records"
 output_dir="export"
 
 # Force a custom SOA Hostmaster for all the domains
-force_soa_hostmaster="admin.extremeshok.com"
+#force_soa_hostmaster="admin.extremeshok.com"
 
 # Force a custom SOA nameserver1 for all the domains
-force_soa_ns1="xs1.extremeshok.com"
+#force_soa_ns1="xs1.extremeshok.com"
 
 
 # Custom serial for soa : 1yyyymmdd01
-default_soa_serial="1$(date -u +%Y%m%d01)"
+default_soa_serial="1$(date -u +%Y%m%d0)"
 # EPOCH serial for soa : 1461802858
 #default_soa_serial=$(date -u +%s)
 
@@ -54,15 +54,26 @@ force_default_soa_serial="NO" #set to YES to enable
 #force_record_ttl="3600" #1 hour
 force_ns_ttl="84600" #1 day
 force_mx_ttl="14400" #4 hours
-
 default_ttl="3600"
+
+# Due to gdnsd not supporting dnssec, we will disable dnssec record types
+# Disabled record types are specified in the dnssec_record_types array
+disable_dnssec_records="YES" #set to NO to disable
+
+# Due to gdnsd not supporting obselete and some non-standard record types, we will disable them
+# Disabled record types are specified in the not_implemented_record_types array
+disable_not_implemented_records="YES" #set to NO to disable
+
+# Records that need to be disabled due to dnssec or not implemented
+# According to: https://github.com/gdnsd/gdnsd/blob/master/t/Net/DNS.pm
+dnssec_record_types=("SIG" "KEY" "NXT" "DS" "RRSIG" "NSEC" "DNSKEY" "DLV")
+not_implemented_record_types=("MD" "MF" "WKS" "NSAP_PTR" "GPOS" "ATMA" "A6" "SINK" "NINFO" "RKEY" "TA")
 
 # Shortens the record names by removing the domain name from them
 # This enhances the readability of your templates
 # eg. www.domain.com. --> www
 # eg. domain.com. --> @
 shorten_domain_records="YES" #set to NO to disable
-
 
 # Add missing ending dots to records, this is dependent on your PowerDNS
 # the script will attempt to validate if the record requires a dot
@@ -171,6 +182,19 @@ function xshok_mysql_read () {
   IFS= read -r "$1" <<< "$input"
 }
 
+# Function to determin if an array contains a specific string
+function xshok_is_in_array () { #arrayname #string
+    local haystack=${1}[@]
+    local needle=${2}
+    for i in ${!haystack}; do
+        if [[ ${i} == ${needle} ]]; then
+            return 0
+        fi
+    done
+    return 1
+}
+
+
 ################################################################################
 # ADDITIONAL PROGRAM FUNCTIONS
 ################################################################################
@@ -223,8 +247,8 @@ function check_new_version () {
 ################################################################################
 
 # Script Info
-script_version="2.0.0"
-script_version_date="28 April 2016"
+script_version="2.1.0"
+script_version_date="29 April 2016"
 
 # Generic command line options
 while true ; do
@@ -333,21 +357,12 @@ for config_file in "${config_files[@]}" ; do
 			break  # Skip entire rest of loop.
 		fi
 		
-		# Check if database requires a password
-			
-		### config error checking
-		# check "" are an even number
-		# config_check="${clean_config//[^\"]}"
-		# if [ $(( ${#config_check} % 2)) -eq 1 ] ; then 
-		# 	xshok_pretty_echo_and_log "ERROR: Your configuration has errors, every \" requires a closing \"" "="     
-		# 	exit 1
-		# fi
 	fi
 done
 
 ## Make sure we have a readable config file
 if [ "$we_have_a_config" == "0" ] ; then
-	xshok_pretty_echo_and_log "ERROR: Config file/s could NOT be read/loaded" "="
+	xshok_pretty_echo "ERROR: Config file/s could NOT be read/loaded" "="
 	exit 1
 fi
 
@@ -433,12 +448,13 @@ EOF
 	# ALL RECORDS
 	# Initialise for new domain
 	previous_record_type=""
+	ns_record_ttl=""
+
 	if [ "$add_mssing_ns_record_for_domain_soa_ns1" != "YES" ] ; then
 		domain_soa_ns1_found_in_ns="YES"
 	else
 		domain_soa_ns1_found_in_ns="NO"
 	fi
-	ns_record_ttl=""
 
 	# Loop though the result rows
 	while IFS=$'\t' xshok_mysql_read record_name record_type record_content record_ttl record_prio record_change_date record_ordername; do
@@ -522,7 +538,7 @@ EOF
 					domain_soa_ns1_found_in_ns="YES"
 				fi
 			fi
-			# SAll TTLs for type NS should match (using 84600)
+			# All TTLs for type NS should match
 			if [ "$ns_record_ttl" == "" ] ; then
 				ns_record_ttl="$record_ttl"
 			else
@@ -535,14 +551,33 @@ EOF
 		if [ "$record_type" == "CNAME" ] ; then
 			tmp_record_name=$(echo "$record_name" | sed 's:\.*$::')
 			if [ "$tmp_record_name" == "$domain_name" ]; then
+				xshok_pretty_echo "-- Disabled Record: cname record is the domain name"
 				record_name="; $record_name"
 			fi
 		fi
 
 		# Disable invalid record that begins with @.
 		if [[ ${record_name:0:2} == "@." ]]  ; then
+			xshok_pretty_echo "-- Disabled Record: begins with @."
 			record_name="; $record_name"
 		fi
+
+		# Disable not implemented record types
+		if [ "$disable_not_implemented_records" == "YES" ] ; then
+			if xshok_is_in_array not_implemented_record_types "$record_type" ; then
+				xshok_pretty_echo "-- Disabled Record: not implemented record type"
+				record_name="; $record_name"
+			fi
+		fi
+
+		# Disable dnssec record types
+		if [ "$disable_dnssec_records" == "YES" ] ; then
+			if xshok_is_in_array dnssec_record_types "$record_type" ; then
+				xshok_pretty_echo "-- Disabled Record: dnssec record type"
+				record_name="; $record_name"
+			fi
+		fi
+
 
 		if [ "$shorten_domain_records" == "YES" ] ; then
 			# Remove trailing . (removes . and ..)
