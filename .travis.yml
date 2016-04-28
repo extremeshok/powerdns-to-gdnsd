@@ -16,7 +16,7 @@ before_install:
   - "sudo apt-get -qq update"
   - "sudo apt-get install -y mysql-server"
   - "sudo service mysql restart"
-  - "sudo apt-get install -y gdnsd libev4 liburcu1"
+  - "sudo apt-get install -y -f gdnsd libev4 liburcu1"
   #- sudo apt-get update -q
   #- "sudo service gdnsd start"
 
