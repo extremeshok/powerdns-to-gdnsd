@@ -12,8 +12,8 @@ PowerDNS to gdnsd domain/zone Migrator
 The powerdns-to-gdnsd script provides a simple way to export all your domains/zones from PowerDNS into gdnsd. The script will test and generate correct gdnsd zonefiles. The zonefiles can be used directly with gdnsd without needing any changes. There are various tests to ensure the generated zonefiles are valid and minor issues will be fixes automatically. The script will attempt to load the powerdns configs to automatically configure itself to be able to fetch the domain/zone records from the database.
 
 ## Assumptions
-PowerDNS server (pdns-server) using backend mysql (dns-backend-mysql) with standard table structures (table names and columns)
-If the need arises we can add support for other backends/database systems (pgsql, etc)
+PowerDNS server (pdns-server) using backend MySQL (dns-backend-mysql / gmysqlbackend) with the standard scheme (table names and columns) : https://raw.githubusercontent.com/PowerDNS/pdns/master/modules/gmysqlbackend/schema.mysql.sql
+If the need arises we can add support for other backends/database systems (pgsql, sqlite, etc)
 
 #### Try our other custom scripts: https://github.com/extremeshok
 
@@ -32,8 +32,8 @@ Please post them on the issue tracker : https://github.com/extremeshok/powerdns-
 
 ### Config Files and Detected Settings
 * Default configs are loaded in the following order if they exist:
-* /etc/pdns/pdns.conf -> /etc/pdns/conf.d/gmysql.conf
-* A minimum of 1 config is required.
+* /etc/powerdns/pdns.conf -> /etc/powerdns/pdns.d/pdns.local.conf -> /etc/powerdns/pdns.d/pdns.local.gmysql.conf ->  /etc/pdns/pdns.conf -> /etc/pdns/conf.d/gmysql.conf
+* A minimum of 1 config is required which contains the database parameters.
 * Specifying a config on the command line (-c | --config) will override the loading of the default configs
 
 #### Testing generated zonefiles

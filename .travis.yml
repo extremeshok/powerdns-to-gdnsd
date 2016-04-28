@@ -13,16 +13,21 @@ dist: trusty
 #    - tmp/cache
 
 before_install:
-  - "sudo apt-get update -qq"
-  - "sudo apt-get install gdnsd -qq"
+  - "sudo apt-get update -y -qq"
+  - "sudo apt-get install mysql-server -y -qq"
+  - "sudo service mysql start"
+  #- "sudo apt-get install pdns-server pdns-backend-mysql -y -qq"
+  - "sudo apt-get install gdnsd -y -qq"
   #- "sudo service gdnsd start"
 
 install:
-  - "sudo mkdir -p /etc/pdns/conf.d"
-  - "sudo cp -f .travis/tests/gmysql.conf /etc/pdns/conf.d/gmysql.conf"
+  - "sudo mkdir -p /etc/powerdns/pdns.d"
+  - "sudo cp -f .travis/tests/powerdns/gmysql.conf /etc/powerdns/pdns.d/pdns.local.gmysql.conf"
+  - "sudo sh -e .travis/ci-setup.sh"
+
 
 script:
-  - sudo sh -e .travis/ci-test.sh
+  - "sudo sh -e .travis/ci-test.sh"
 
 #addons:
 #  code_climate:
