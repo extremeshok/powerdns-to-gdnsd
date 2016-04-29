@@ -36,6 +36,15 @@ else
     exit 1
 fi
 
+echo "Importing the PowerDNS mysql addzone.com zone"
+mysql --host=localhost --user=root --database=powerdns < ".travis/tests/powerdns/mysql-zones/addzone.com.sql"
+if [ "$?" -eq 0 ] ; then
+    echo ".. OK"
+else
+    echo ".. ERROR"
+    exit 1
+fi
+
 echo "Testing database is correctly configured"
 myresult="$(mysql --user=powerdns --password="8wksjehkaj" --database=powerdns --skip-column-names -e "SELECT name FROM domains WHERE name='example.com' ")"
 if [ "$myresult" = "example.com" ] ; then
