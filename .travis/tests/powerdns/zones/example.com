@@ -32,8 +32,7 @@ location		IN	LOC	51 56 0.123 N 5 54 0.000 E 4.00m 1.00m 10000.00m 10.00m
 ;
 unauth			IN	CNAME	no-idea.example.org.
 ;
-dsdelegation		IN	NS	ns.example.com.
-			IN	DS	28129 8 1 caf1eaaecdabe7616670788f9022454bf5fd9fda
+dsdelegation		IN	DS	28129 8 1 caf1eaaecdabe7616670788f9022454bf5fd9fda
 ;
 nxd			IN	CNAME	nxdomain.example.com.
 ;
@@ -57,10 +56,6 @@ start1			IN	CNAME	start2
 start2			IN	CNAME	start3
 start3			IN	CNAME	start4
 start4			IN	A	192.168.2.2
-;
-loop1			IN	CNAME	loop2
-loop2			IN	CNAME	loop3
-loop3			IN	CNAME	loop1
 ;
 external		IN	CNAME 	somewhere.else.net.
 semi-external		IN	CNAME	bla.something.wtest.com.

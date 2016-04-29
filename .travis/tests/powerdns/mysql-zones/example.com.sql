@@ -16,7 +16,6 @@ insert into records (domain_id, name, type,content,ttl,prio,disabled) select id 
 insert into records (domain_id, name, type,content,ttl,prio,disabled) select id ,'location.example.com', 'LOC', '51 56 2.789 N 5 54 0.000 W 4.00m 3.00m 10000.00m 10.00m', 120, 0, 0 from domains where name='example.com';
 insert into records (domain_id, name, type,content,ttl,prio,disabled) select id ,'location.example.com', 'LOC', '51 56 3.012 S 5 54 0.000 W 4.00m 4.00m 10000.00m 10.00m', 120, 0, 0 from domains where name='example.com';
 insert into records (domain_id, name, type,content,ttl,prio,disabled) select id ,'unauth.example.com', 'CNAME', 'no-idea.example.org', 120, 0, 0 from domains where name='example.com';
-insert into records (domain_id, name, type,content,ttl,prio,disabled) select id ,'dsdelegation.example.com', 'NS', 'ns.example.com', 120, 0, 0 from domains where name='example.com';
 insert into records (domain_id, name, type,content,ttl,prio,disabled) select id ,'dsdelegation.example.com', 'DS', '28129 8 1 caf1eaaecdabe7616670788f9022454bf5fd9fda', 120, 0, 0 from domains where name='example.com';
 insert into records (domain_id, name, type,content,ttl,prio,disabled) select id ,'nxd.example.com', 'CNAME', 'nxdomain.example.com', 120, 0, 0 from domains where name='example.com';
 insert into records (domain_id, name, type,content,ttl,prio,disabled) select id ,'hwinfo.example.com', 'HINFO', '"abc" "def"', 120, 0, 0 from domains where name='example.com';
@@ -34,9 +33,6 @@ insert into records (domain_id, name, type,content,ttl,prio,disabled) select id 
 insert into records (domain_id, name, type,content,ttl,prio,disabled) select id ,'start2.example.com', 'CNAME', 'start3.example.com', 120, 0, 0 from domains where name='example.com';
 insert into records (domain_id, name, type,content,ttl,prio,disabled) select id ,'start3.example.com', 'CNAME', 'start4.example.com', 120, 0, 0 from domains where name='example.com';
 insert into records (domain_id, name, type,content,ttl,prio,disabled) select id ,'start4.example.com', 'A', '192.168.2.2', 120, 0, 0 from domains where name='example.com';
-insert into records (domain_id, name, type,content,ttl,prio,disabled) select id ,'loop1.example.com', 'CNAME', 'loop2.example.com', 120, 0, 0 from domains where name='example.com';
-insert into records (domain_id, name, type,content,ttl,prio,disabled) select id ,'loop2.example.com', 'CNAME', 'loop3.example.com', 120, 0, 0 from domains where name='example.com';
-insert into records (domain_id, name, type,content,ttl,prio,disabled) select id ,'loop3.example.com', 'CNAME', 'loop1.example.com', 120, 0, 0 from domains where name='example.com';
 insert into records (domain_id, name, type,content,ttl,prio,disabled) select id ,'external.example.com', 'CNAME', 'somewhere.else.net', 120, 0, 0 from domains where name='example.com';
 insert into records (domain_id, name, type,content,ttl,prio,disabled) select id ,'semi-external.example.com', 'CNAME', 'bla.something.wtest.com', 120, 0, 0 from domains where name='example.com';
 insert into records (domain_id, name, type,content,ttl,prio,disabled) select id ,'server1.example.com', 'CNAME', 'server1.france.example.com', 120, 0, 0 from domains where name='example.com';

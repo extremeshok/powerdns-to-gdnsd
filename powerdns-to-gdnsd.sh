@@ -472,6 +472,8 @@ EOF
 
 		# Add the trailing . (attemtping to detect when it is required)
 		if [ "$add_dots_to_records" == "YES" ] ; then
+
+			## RECORD_NAME
 			# Check if last character is not a .
 			if [ "${record_name: -1}" != "." ] ; then
 				#support for *. domain records (*.xyz.com and abc.*.xyz.com)
@@ -485,13 +487,31 @@ EOF
 					record_name="$record_name."
 				fi
 			fi
-			# Check if last character is not a .
-			if [ "${record_content: -1}" != "." ] ; then
-				# Check the record_name is a domain
-				if [[ ! -z "$(echo "$record_content" | grep -P '(?=^.{1,254}$)(^(?>(?!\d+\.)[a-zA-Z0-9_\-]{1,63}\.?)+(?:[a-zA-Z]{2,})$)')" ]] ; then
-					record_content="$record_content."
-				fi
-			fi
+
+			## RECORD_CONTENT
+			#this will add . to the end of any FQDN inside string
+			#this code block was tested with the following string
+			#record_content="\"u\" \"e2u+sip\" *.yes www.*.domain.com \"\" testuser.domain.com"
+				read -ra record_content_array <<<"$record_content"
+				i=0; for record_content_array_element in "${record_content_array[@]}"; do
+					# Check if last character is not a .
+					if [ "${record_content_array_element: -1}" != "." ] ; then
+						#support for *. domain records (*.xyz.com and abc.*.xyz.com)
+						if [[ "$record_content_array_element" == *"*."* ]] ; then
+							temp_record_content_array_element="${record_content_array_element/\*./}"
+						else
+							temp_record_content_array_element="$record_content_array_element"
+						fi
+						# Check the record_name is a domain
+						if [[ ! -z "$(echo "$temp_record_content_array_element" | grep -P '(?=^.{1,254}$)(^(?>(?!\d+\.)[a-zA-Z0-9_\-]{1,63}\.?)+(?:[a-zA-Z]{2,})$)')" ]] ; then
+							#reassign the new value to the current array element
+							record_content_array[$i]="$record_content_array_element."
+						fi
+					fi
+					let i++;
+				done
+			#reassign the array into a string
+			record_content="${record_content_array[@]}"
 		fi
 		
 		if [ "$previous_record_type" == "" ] || [ "$previous_record_type" != "$record_type" ] ; then
