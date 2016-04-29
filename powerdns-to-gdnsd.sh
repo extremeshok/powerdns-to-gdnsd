@@ -616,8 +616,8 @@ EOF
 			record_content="\"$record_content\""
 		fi
 	  
-	  #Bug fix: replace double // with /
-		record_content="${record_content/\/\//\/}"
+	  #Bug fix: replace double \\ with \
+		record_content="${record_content/\\\\/\\}"
 
 		echo "$record_name  $record_ttl  IN  $record_type  $record_prio  $record_content" >> "$output_dir/$domain_name"
 	
