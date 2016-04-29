@@ -30,13 +30,17 @@ echo "---BEGIN---"
 cat /tmp/export/example.com
 echo "---END---"
 
-echo "Testing addzone.com"
-cp -f /tmp/export/addzone.com /etc/gdnsd/zones/addzone.com
-myresult="$(gdnsd -c /etc/gdnsd checkconf 2>&1 | grep "fatal")"
-if [ "$myresult" == "" ]; then
-	echo ".. OK"	
+if [ -e "/tmp/export/addzone.com" ] ; then
+	echo "Testing addzone.com"
+	cp -f /tmp/export/addzone.com /etc/gdnsd/zones/addzone.com
+	myresult="$(gdnsd -c /etc/gdnsd checkconf 2>&1 | grep "fatal")"
+	if [ "$myresult" == "" ]; then
+		echo ".. OK"	
+	else
+		echo "$myresult"
+		echo ".. ERROR"
+		exit 1
+	fi
 else
-	echo "$myresult"
-	echo ".. ERROR"
-	exit 1
+	echo "addzone.com not found"
 fi
