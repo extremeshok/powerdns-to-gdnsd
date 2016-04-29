@@ -14,11 +14,13 @@ before_install:
   - "sudo apt-get -qq update"
   - "sudo apt-get install -y mysql-server"
   - "sudo service mysql restart"
+
+  # gdnsd from the repo does not work on the travis platform
   # Begin: workaround for failed start of gdnsd
-  - "echo exit 101 | sudo tee /usr/sbin/policy-rc.d"
-  - "sudo chmod +x /usr/sbin/policy-rc.d"
+  #- "echo exit 101 | sudo tee /usr/sbin/policy-rc.d"
+  #- "sudo chmod +x /usr/sbin/policy-rc.d"
   # End: workaround for failed start of gdnsd
-  - "sudo apt-get install -y -f gdnsd libev4 liburcu1"
+  #- "sudo apt-get install -y -f gdnsd libev4 liburcu1"
 
 
 install:
@@ -29,6 +31,6 @@ install:
 script:
   - "sudo sh -e .travis/ci-test.sh"
 
-#addons:
-#  code_climate:
-#    repo_token: 
+addons:
+ code_climate:
+   repo_token: 2d60cadf31fa59bdc7c8c58d913b12b032b729f93b588b69ee1fdd687f9868d9
