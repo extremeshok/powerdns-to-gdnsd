@@ -68,6 +68,27 @@ Please post them on the issue tracker : https://github.com/extremeshok/powerdns-
  - eXtremeSHOK.com Internal
 
 ## USAGE
+````
+ Usage: powerdns-to-gdnsd.sh     [OPTION] [PATH|FILE]
 
-Usage: powerdns-to-gdnsd.sh [OPTION] [PATH|FILE]
+
+ -h, --help      Display this script's help and usage information
+
+
+ -V, --version   Output script version and date information
+
+
+ -v, --verbose   Be verbose, enabled when not run under cron
+
+
+ -s, --silence   Only output error messages, enabled when run under cron
+
+
+ -o, --output    Output the zonefiles to a specific directory eg: '-o /your/directory'
+
+
+ -c, --config    Use a specific configuration file
+         eg: '-c /your/file.name'
+````
+
 
