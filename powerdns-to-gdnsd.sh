@@ -600,7 +600,7 @@ EOF
 			record_ttl=""
 		fi		
 		
-		if ( [ "$record_prio" == "0" ] && [ "$record_type" != "MX" ] ) || [ "$record_type" == "NS" ]; then
+		if ( [ "$record_prio" == "0" ] && [ "$record_type" != "MX" ] && [ "$record_type" != "SRV" ] ) || [ "$record_type" == "NS" ]; then
 			record_prio=""
 		fi
 
