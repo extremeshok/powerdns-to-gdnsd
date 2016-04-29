@@ -49,6 +49,7 @@ Please post them on the issue tracker : https://github.com/extremeshok/powerdns-
  - Added function xshok_is_in_array to check if a string is in an array
  - Added option to disable dnssec records
  - Added option to disable not implemented records
+ - Added support for wildcard record domains (*.example.com)
 
 ### Version 2.0.0
  - eXtremeSHOK.com Maintenance

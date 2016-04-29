@@ -474,8 +474,14 @@ EOF
 		if [ "$add_dots_to_records" == "YES" ] ; then
 			# Check if last character is not a .
 			if [ "${record_name: -1}" != "." ] ; then
+				#support for *. domain records
+				if [[ "$record_name" == "*."* ]] ; then
+					temp_record_name="${record_name#*.}"
+				else
+					temp_record_name="$record_name"
+				fi
 				# Check the record_name is a domain
-				if [[ ! -z "$(echo "$record_name" | grep -P '(?=^.{1,254}$)(^(?>(?!\d+\.)[a-zA-Z0-9_\-]{1,63}\.?)+(?:[a-zA-Z]{2,})$)')" ]] ; then
+				if [[ ! -z "$(echo "$temp_record_name" | grep -P '(?=^.{1,254}$)(^(?>(?!\d+\.)[a-zA-Z0-9_\-]{1,63}\.?)+(?:[a-zA-Z]{2,})$)')" ]] ; then
 					record_name="$record_name."
 				fi
 			fi
