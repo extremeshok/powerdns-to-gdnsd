@@ -613,7 +613,14 @@ EOF
 		fi
 
 		if [ "$record_type" == "TXT" ] ; then
-			record_content="\"$record_content\""
+			if [ "${record_content: -1}" != "\"" ] ; then
+				# add " to the end
+				record_content="$record_content\""
+			fi
+			if [ "${record_content:0:1}" != "\"" ] ; then
+				# add " to the beginning
+				record_content="\"$record_content"
+			fi
 		fi
 	  
 	  # Bug fix: replace all \\ with \
