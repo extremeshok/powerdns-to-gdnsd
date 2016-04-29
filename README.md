@@ -13,7 +13,7 @@ The powerdns-to-gdnsd script provides a simple way to export all your domains/zo
 
 ## FYI
 The following was developed to migrate a 5node powerdns mysql cluster with over 2000 domains to gdnsd.
-The script can also be run via cron, this could allow your to the current powerdns database and webinterfaces to generate working gdnsd records, without actually using powerdns
+The script can also be run via cron, this could allow you to still use your the current powerdns database and webinterfaces to generate working gdnsd records, without actually using powerdns.
 Please see the "sample" directory or the travis-ci build logs to see 2 examples of generated records.
 
 ## Assumptions
