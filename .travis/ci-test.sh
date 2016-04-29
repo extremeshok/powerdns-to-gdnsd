@@ -9,20 +9,23 @@ export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/usr/lo
 #run the script
 bash powerdns-to-gdnsd.sh --output /tmp/export
 if [ "$?" -eq 0 ] ; then
-    echo "Success"
+    echo ".. OK"
 else
-    echo "Error"
+    echo ".. ERROR"
     exit 1
 fi
 
 #check zonefile generation
 if [ -e "/tmp/export/example.com" ] ; then
-	echo .. OK	
+	echo ".. OK"	
 else
-	echo .. ERROR
+	echo ".. ERROR"
 	exit 1
 fi
 
 #temp to grab the zonefile
+echo "The generated zonefile is displayed below, this allows for manaul review of the generated zonefile"
+echo "---BEGIN---"
 cat /tmp/export/example.com
+echo "---END---"
 
