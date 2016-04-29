@@ -622,7 +622,7 @@ EOF
 		echo "$record_name  $record_ttl  IN  $record_type  $record_prio  $record_content" >> "$output_dir/$domain_name"
 	
 	#End records
-	done < <($MYSQLCMD --batch -e "SELECT name, type,  REPLACE(content,'\"',''), ttl, prio, change_date, ordername FROM $records_table WHERE domain_id = '$domain_id' AND disabled = '0' AND type != 'SOA' ORDER BY type;")
+	done < <($MYSQLCMD --batch -e "SELECT name, type,  content, ttl, prio, change_date, ordername FROM $records_table WHERE domain_id = '$domain_id' AND disabled = '0' AND type != 'SOA' ORDER BY type;")
 
 	
 	# No ns_record_ttl was defined, this means we have no NS records and the domain is invalid.
