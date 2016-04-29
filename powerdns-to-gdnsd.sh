@@ -474,9 +474,9 @@ EOF
 		if [ "$add_dots_to_records" == "YES" ] ; then
 			# Check if last character is not a .
 			if [ "${record_name: -1}" != "." ] ; then
-				#support for *. domain records
-				if [[ "$record_name" == "*."* ]] ; then
-					temp_record_name="${record_name#*.}"
+				#support for *. domain records (*.xyz.com and abc.*.xyz.com)
+				if [[ "$record_name" == *"*."* ]] ; then
+					temp_record_name="${record_name/\*./}"
 				else
 					temp_record_name="$record_name"
 				fi
