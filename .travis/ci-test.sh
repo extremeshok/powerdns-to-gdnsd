@@ -41,8 +41,10 @@ else
 fi
 
 echo "Testing zonefiles with gdnsd"
+mkdir -p /etc/gdnsd/zones
 cp -f /tmp/export/addzone.com /etc/gdnsd/zones/addzone.com
-gdnsd -c /etc/gdnsd checkconf 2>1
+
+echo "$(gdnsd -c /etc/gdnsd checkconf 2>1)"
 ##we wont fail this yes, more this is done to grab the input to work out the next steps
 
 # myresult="$(gdnsd -c /etc/gdnsd checkconf 2>&1 | grep "fatal")"
