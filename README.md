@@ -11,6 +11,11 @@ PowerDNS to gdnsd domain/zone Migrator
 ## Description
 The powerdns-to-gdnsd script provides a simple way to export all your domains/zones from PowerDNS into gdnsd. The script will test and generate correct gdnsd zonefiles. The zonefiles can be used directly with gdnsd without needing any changes. There are various tests to ensure the generated zonefiles are valid and minor issues will be fixes automatically. The script will attempt to load the powerdns configs to automatically configure itself to be able to fetch the domain/zone records from the database. Due to gdnsd not supporting dnssec as well as some obselete and non-standard record types, they we will be automatically disabled. The script will also disable any invalid records. 
 
+## FYI
+The following was developed to migrate a 5node powerdns mysql cluster with over 2000 domains to gdnsd.
+The script can also be run via cron, this could allow your to the current powerdns database and webinterfaces to generate working gdnsd records, without actually using powerdns
+Please see the "sample" directory or the travis-ci build logs to see 2 examples of generated records.
+
 ## Assumptions
 PowerDNS server (pdns-server) using backend MySQL (dns-backend-mysql / gmysqlbackend) with the standard scheme (table names and columns) : https://raw.githubusercontent.com/PowerDNS/pdns/master/modules/gmysqlbackend/schema.mysql.sql
 If the need arises we can add support for other backends/database systems (pgsql, sqlite, etc)
@@ -49,7 +54,10 @@ Please post them on the issue tracker : https://github.com/extremeshok/powerdns-
  - Added function xshok_is_in_array to check if a string is in an array
  - Added option to disable dnssec records
  - Added option to disable not implemented records
- - Added support for wildcard record domains (*.example.com)
+ - Added support for wildcard record domains (*.example.com and www.*.example.com)
+ - Proper support for "" in records
+ - Fixed: invalid srv records
+ - Replaced cat << EOF with echo
 
 ### Version 2.0.0
  - eXtremeSHOK.com Maintenance

@@ -3,8 +3,8 @@
 
 $TTL 3600
 $ORIGIN example.com.
-@  1D  IN SOA  xs1.extremeshok.com.  admin.extremeshok.com.  (
-  1201604280  ; serial
+@  1D  IN SOA  ns1.example.com.  ahu.example.com.  (
+  1201604290  ; serial
   28800  ; refresh
   7200  ; retry
   604800  ; expire
@@ -22,13 +22,13 @@ smtp-servers  120  IN  A    192.168.0.2
 smtp-servers  120  IN  A    192.168.0.3
 smtp-servers  120  IN  A    192.168.0.4
 outpost  120  IN  A    192.168.2.1
-*.w5.example.com  120  IN  A    1.2.3.5
+*.w5  120  IN  A    1.2.3.5
 start4  120  IN  A    192.168.2.2
 usa-ns1.usa  120  IN  A    192.168.4.1
 usa-ns2.usa  120  IN  A    192.168.4.2
 italy-ns1  120  IN  A    192.168.5.1
 italy-ns2  120  IN  A    192.168.5.2
-host.*.sub.example.com  120  IN  A    192.168.6.1
+host.*.sub  120  IN  A    192.168.6.1
 toomuchinfo-a  120  IN  A    192.168.99.1
 toomuchinfo-a  120  IN  A    192.168.99.2
 toomuchinfo-a  120  IN  A    192.168.99.3
@@ -216,16 +216,13 @@ www  120  IN  CNAME    outpost.example.com.
 unauth  120  IN  CNAME    no-idea.example.org.
 nxd  120  IN  CNAME    nxdomain.example.com.
 start  120  IN  CNAME    x.y.z.w1.example.com.
-*.w1.example.com  120  IN  CNAME    x.y.z.w2.example.com.
-*.w2.example.com  120  IN  CNAME    x.y.z.w3.example.com.
-*.w3.example.com  120  IN  CNAME    x.y.z.w4.example.com.
-*.w4.example.com  120  IN  CNAME    x.y.z.w5.example.com.
+*.w1  120  IN  CNAME    x.y.z.w2.example.com.
+*.w2  120  IN  CNAME    x.y.z.w3.example.com.
+*.w3  120  IN  CNAME    x.y.z.w4.example.com.
+*.w4  120  IN  CNAME    x.y.z.w5.example.com.
 start1  120  IN  CNAME    start2.example.com.
 start2  120  IN  CNAME    start3.example.com.
 start3  120  IN  CNAME    start4.example.com.
-loop1  120  IN  CNAME    loop2.example.com.
-loop2  120  IN  CNAME    loop3.example.com.
-loop3  120  IN  CNAME    loop1.example.com.
 external  120  IN  CNAME    somewhere.else.net.
 semi-external  120  IN  CNAME    bla.something.wtest.com.
 server1  120  IN  CNAME    server1.france.example.com.
@@ -234,26 +231,26 @@ rhs-at-expansion  120  IN  CNAME    example.com.
 
 ; DS
 
-dsdelegation  120  IN  DS    28129 8 1 caf1eaaecdabe7616670788f9022454bf5fd9fda
+; dsdelegation  120  IN  DS    28129 8 1 caf1eaaecdabe7616670788f9022454bf5fd9fda
 
 ; EUI48
 
-host-0  120  IN  EUI48    00-50-56-9b-00-e7
+; host-0  120  IN  EUI48    00-50-56-9b-00-e7
 
 ; EUI64
 
-host-1  120  IN  EUI64    00-50-56-9b-00-e7-7e-57
+; host-1  120  IN  EUI64    00-50-56-9b-00-e7-7e-57
 
 ; HINFO
 
-hwinfo  120  IN  HINFO    abc def
+; hwinfo  120  IN  HINFO    "abc" "def"
 
 ; LOC
 
-location  120  IN  LOC    51 56 0.123 N 5 54 0.000 E 4.00m 1.00m 10000.00m 10.00m
-location  120  IN  LOC    51 56 1.456 S 5 54 0.000 E 4.00m 2.00m 10000.00m 10.00m
-location  120  IN  LOC    51 56 2.789 N 5 54 0.000 W 4.00m 3.00m 10000.00m 10.00m
-location  120  IN  LOC    51 56 3.012 S 5 54 0.000 W 4.00m 4.00m 10000.00m 10.00m
+; location  120  IN  LOC    51 56 0.123 N 5 54 0.000 E 4.00m 1.00m 10000.00m 10.00m
+; location  120  IN  LOC    51 56 1.456 S 5 54 0.000 E 4.00m 2.00m 10000.00m 10.00m
+; location  120  IN  LOC    51 56 2.789 N 5 54 0.000 W 4.00m 3.00m 10000.00m 10.00m
+; location  120  IN  LOC    51 56 3.012 S 5 54 0.000 W 4.00m 4.00m 10000.00m 10.00m
 
 ; Mail exchangers
 
@@ -268,7 +265,6 @@ together-too-much  14400  IN  MX  25  toomuchinfo-b.example.com.
 
 @  84600  IN  NS    ns1.example.com.
 @  84600  IN  NS    ns2.example.com.
-dsdelegation  84600  IN  NS    ns.example.com.
 france  84600  IN  NS    ns1.otherprovider.net.
 france  84600  IN  NS    ns2.otherprovider.net.
 usa  84600  IN  NS    usa-ns1.usa.example.com.
@@ -279,8 +275,8 @@ italy  84600  IN  NS    italy-ns2.example.com.
 ; Text records : DKIM/DMARC/SPF/DNS-SD/etc.
 
 text  120  IN  TXT    "Hi, this is some text"
-multitext  120  IN  TXT    "text part one text part two text part three"
-escapedtext  120  IN  TXT    "begin the \middle\ p\\art the end"
+multitext  120  IN  TXT    "text part one" "text part two" "text part three"
+escapedtext  120  IN  TXT    "begin" "the \"middle\" p\\art" "the end"
 text0  120  IN  TXT    "k=rsa; p=one"
 text1  120  IN  TXT    "k=rsa\; p=one"
 text2  120  IN  TXT    "k=rsa\\; p=one"
@@ -288,5 +284,4 @@ text3  120  IN  TXT    "k=rsa\\\; p=one"
 
 ; TYPE65534
 
-hightype  120  IN  TYPE65534    \# 5 07ED260001
-@  120  NS    xs1.extremeshok.com.
+; hightype  120  IN  TYPE65534    \# 5 07ED260001
