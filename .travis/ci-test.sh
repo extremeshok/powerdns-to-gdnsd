@@ -16,31 +16,37 @@ else
     exit 1
 fi
 
-echo "Checking zonefile generation"
+echo "Checking example.com zonefile generation"
 if [ -e "/tmp/export/example.com" ] ; then
 	echo ".. OK"	
+	echo "The generated example.com zonefile is displayed below, this allows for manaul review of the generated zonefile"
+	echo "---BEGIN---"
+	cat /tmp/export/example.com
+	echo "---END---"
 else
 	echo ".. ERROR"
 	exit 1
 fi
 
-#temp to grab the zonefile
-echo "The generated zonefile is displayed below, this allows for manaul review of the generated zonefile"
-echo "---BEGIN---"
-cat /tmp/export/example.com
-echo "---END---"
-
+echo "Checking addzone.com zonefile generation"
 if [ -e "/tmp/export/addzone.com" ] ; then
-	echo "Testing addzone.com"
-	cp -f /tmp/export/addzone.com /etc/gdnsd/zones/addzone.com
-	myresult="$(gdnsd -c /etc/gdnsd checkconf 2>&1 | grep "fatal")"
-	if [ "$myresult" == "" ]; then
-		echo ".. OK"	
-	else
-		echo "$myresult"
-		echo ".. ERROR"
-		exit 1
-	fi
+	echo ".. OK"
+	echo "The generated addzone.com zonefile is displayed below, this allows for manaul review of the generated zonefile"
+	echo "---BEGIN---"
+	cat /tmp/export/addzone.com
+	echo "---END---"
 else
-	echo "addzone.com not found"
+	echo ".. ERROR"
+	exit 1
 fi
+
+# echo "Testing addzone.com"
+# cp -f /tmp/export/addzone.com /etc/gdnsd/zones/addzone.com
+# myresult="$(gdnsd -c /etc/gdnsd checkconf 2>&1 | grep "fatal")"
+# if [ "$myresult" == "" ]; then
+# 	echo ".. OK"	
+# else
+# 	echo "$myresult"
+# 	echo ".. ERROR"
+# 	exit 1
+# fi
