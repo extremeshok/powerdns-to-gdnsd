@@ -459,13 +459,13 @@ EOF
 	# Loop though the result rows
 	while IFS=$'\t' xshok_mysql_read record_name record_type record_content record_ttl record_prio record_change_date record_ordername; do
 		# Assign to varibles without needing the {} and remove trailing whitespace
-		record_name="$(echo "${record_name}" | xargs -0)"
-		record_type="$(echo "${record_type}" | xargs -0)"
-		record_content="$(echo "${record_content}" | xargs -0)"
-		record_ttl="$(echo "${record_ttl}" | xargs -0)"
-		record_prio="$(echo "${record_prio}" | xargs -0)"
-		record_change_date="$(echo "${record_change_date}" | xargs -0)"
-		record_ordername="$(echo "${record_ordername}" | xargs -0)"
+		record_name="$(echo "${record_name}" | xargs)"
+		record_type="$(echo "${record_type}" | xargs)"
+		record_content="$(echo "${record_content}")"
+		record_ttl="$(echo "${record_ttl}" | xargs)"
+		record_prio="$(echo "${record_prio}" | xargs)"
+		record_change_date="$(echo "${record_change_date}" | xargs)"
+		record_ordername="$(echo "${record_ordername}" | xargs)"
 		
 		# Record types should be uppercase
 		record_type="${record_type^^}"
@@ -617,7 +617,7 @@ EOF
 		fi
 	  
 	  #Bug fix: replace double \\ with \
-		record_content="${record_content/\\\\/\\}"
+		#record_content="${record_content/\\\\/\\}"
 
 		echo "$record_name  $record_ttl  IN  $record_type  $record_prio  $record_content" >> "$output_dir/$domain_name"
 	
