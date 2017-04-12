@@ -12,7 +12,7 @@ dist: trusty
 
 services:
   - mysql
-  
+
 before_install:
   - "sudo apt-get -qq update"
 
@@ -25,12 +25,12 @@ before_install:
 
 
 install:
-  - "sudo sh -e .travis/ci-setup.sh"
+  - "sudo sh -e .t/ci-setup.sh"
   - "sudo mkdir -p /etc/powerdns/pdns.d"
-  - "sudo cp -f .travis/tests/powerdns/gmysql.conf /etc/powerdns/pdns.d/pdns.local.gmysql.conf"
+  - "sudo cp -f .t/tests/powerdns/gmysql.conf /etc/powerdns/pdns.d/pdns.local.gmysql.conf"
 
 script:
-  - "sudo sh -e .travis/ci-test.sh"
+  - "sudo sh -e .t/ci-test.sh"
 
 addons:
  code_climate:

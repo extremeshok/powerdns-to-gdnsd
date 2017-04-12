@@ -9,7 +9,7 @@ PowerDNS to gdnsd domain/zone Migrator
 ## Maintained and provided by https://eXtremeSHOK.com
 
 ## Description
-The powerdns-to-gdnsd script provides a simple way to export all your domains/zones from PowerDNS into gdnsd. The script will test and generate correct gdnsd zonefiles. The zonefiles can be used directly with gdnsd without needing any changes. There are various tests to ensure the generated zonefiles are valid and minor issues will be fixes automatically. The script will attempt to load the powerdns configs to automatically configure itself to be able to fetch the domain/zone records from the database. Due to gdnsd not supporting dnssec as well as some obselete and non-standard record types, they we will be automatically disabled. The script will also disable any invalid records. 
+The powerdns-to-gdnsd script provides a simple way to export all your domains/zones from PowerDNS into gdnsd. The script will test and generate correct gdnsd zonefiles. The zonefiles can be used directly with gdnsd without needing any changes. There are various tests to ensure the generated zonefiles are valid and minor issues will be fixes automatically. The script will attempt to load the powerdns configs to automatically configure itself to be able to fetch the domain/zone records from the database. Due to gdnsd not supporting dnssec as well as some obselete and non-standard record types, they we will be automatically disabled. The script will also disable any invalid records.
 
 ## FYI
 The following was developed to migrate a 5node powerdns mysql cluster with over 2000 domains to gdnsd.
@@ -42,7 +42,7 @@ Please post them on the issue tracker : https://github.com/extremeshok/powerdns-
 * Specifying a config on the command line (-c | --config) will override the loading of the default configs
 
 #### Testing generated zonefiles
-* Run the following command to display any errors with the generated zonefiles 
+* Run the following command to display any errors with the generated zonefiles
 * assumes gdnsd is installed and the generated zonefiles have been copied to /etc/gdnsd/zones
 
 ```gdnsd -fDSs -c /etc/gdnsd checkconf```
@@ -90,5 +90,3 @@ Please post them on the issue tracker : https://github.com/extremeshok/powerdns-
  -c, --config    Use a specific configuration file
          eg: '-c /your/file.name'
 ````
-
-

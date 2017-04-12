@@ -1,0 +1,5 @@
+# example.com zone from powerdns
+wget https://raw.githubusercontent.com/PowerDNS/pdns/master/regression-tests/zones/example.com
+
+# To create the sql from a zone
+zone2sql --zone=example.com --gmysql=yes --zone-name=example.com > example.com.sql
