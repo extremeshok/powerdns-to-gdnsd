@@ -23,6 +23,9 @@ services:
 before_install:
   - "sudo apt-get -qq update"
   - "sudo apt-get install mysql-client-5.6"
+  - "mysql -e 'CREATE DATABASE IF NOT EXISTS powerdns character set utf8;'"
+  - "mysql -e 'GRANT ALL ON powerdns.* TO powerdns@% IDENTIFIED BY 8wksjehkaj;'"
+  - "mysql -e 'FLUSH PRIVILEGES;'"
 
   # gdnsd from the repo does not work on the travis platform
   # Begin: workaround for failed start of gdnsd

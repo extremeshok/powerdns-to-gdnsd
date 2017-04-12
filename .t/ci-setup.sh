@@ -19,7 +19,7 @@ else
 fi
 
 echo "Importing the PowerDNS mysql schema"
-mysql --host=localhost --user=root --database=powerdns < ".travis/tests/powerdns/schema.mysql.sql"
+mysql --host=localhost --user=root --database=powerdns < ".t/tests/powerdns/schema.mysql.sql"
 if [ "$?" -eq 0 ] ; then
     echo ".. OK"
 else
@@ -28,7 +28,7 @@ else
 fi
 
 echo "Importing the PowerDNS mysql example.com zone"
-mysql --host=localhost --user=root --database=powerdns < ".travis/tests/powerdns/mysql-zones/example.com.sql"
+mysql --host=localhost --user=root --database=powerdns < ".t/tests/powerdns/mysql-zones/example.com.sql"
 if [ "$?" -eq 0 ] ; then
     echo ".. OK"
 else
@@ -37,7 +37,7 @@ else
 fi
 
 echo "Importing the PowerDNS mysql addzone.com zone"
-mysql --host=localhost --user=root --database=powerdns < ".travis/tests/powerdns/mysql-zones/addzone.com.sql"
+mysql --host=localhost --user=root --database=powerdns < ".ts/tests/powerdns/mysql-zones/addzone.com.sql"
 if [ "$?" -eq 0 ] ; then
     echo ".. OK"
 else
