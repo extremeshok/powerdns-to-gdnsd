@@ -10,10 +10,11 @@ dist: trusty
 #  directories:
 #    - tmp/cache
 
+services:
+  - mysql
+  
 before_install:
   - "sudo apt-get -qq update"
-  - "sudo apt-get install -y mysql-common mysql-server-5.5 mysql-server-core-5.5 mysql-client-5.5 mysql-client-core-5.5"
-  - "sudo service mysql restart"
 
   # gdnsd from the repo does not work on the travis platform
   # Begin: workaround for failed start of gdnsd
