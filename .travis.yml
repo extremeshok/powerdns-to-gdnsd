@@ -25,6 +25,8 @@ before_install:
 
 
 install:
+  - "sudo ls -l"
+  - "sudo ls -l .t/"
   - "sudo sh -e .t/ci-setup.sh"
   - "sudo mkdir -p /etc/powerdns/pdns.d"
   - "sudo cp -f .t/tests/powerdns/gmysql.conf /etc/powerdns/pdns.d/pdns.local.gmysql.conf"
