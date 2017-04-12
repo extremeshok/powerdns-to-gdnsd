@@ -1,8 +1,18 @@
 #language: shell
 
 #Enable modern build platform, not container based.
-sudo: required
 dist: trusty
+sudo: required
+addons:
+  mariadb: '10.0'
+  apt:
+    sources:
+      - mariadb-10.0
+    packages:
+      - mariadb-server
+      - mariadb-client
+      - libmariadbclient-dev
+
 
 # Apparently caching is disabled, since we used modern build platform
 #Enable Caching
@@ -11,11 +21,10 @@ dist: trusty
 #    - tmp/cache
 
 services:
-  - mysql
+  - mariadb
 
 before_install:
   - "sudo apt-get -qq update"
-  - "sudo apt-get install mysql-client"
 
   # gdnsd from the repo does not work on the travis platform
   # Begin: workaround for failed start of gdnsd
