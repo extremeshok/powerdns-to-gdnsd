@@ -22,7 +22,8 @@ services:
 
 before_install:
   - "sudo apt-get -qq update"
-
+  - "sudo apt-get install mysql-client"
+  
   # gdnsd from the repo does not work on the travis platform
   # Begin: workaround for failed start of gdnsd
   #- "echo exit 101 | sudo tee /usr/sbin/policy-rc.d"
@@ -32,6 +33,7 @@ before_install:
 
 
 install:
+  - "sudo which mysql"
   - "sudo sh -e .t/ci-setup.sh"
   - "sudo mkdir -p /etc/powerdns/pdns.d"
   - "sudo cp -f .t/tests/powerdns/gmysql.conf /etc/powerdns/pdns.d/pdns.local.gmysql.conf"
