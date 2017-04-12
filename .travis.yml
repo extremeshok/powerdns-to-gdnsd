@@ -4,14 +4,11 @@
 dist: trusty
 sudo: required
 addons:
-  mariadb: '10.0'
   apt:
-    sources:
-      - mariadb-10.0
     packages:
-      - mariadb-server
-      - mariadb-client
-      - libmariadbclient-dev
+    - mysql-server-5.6
+    - mysql-client-core-5.6
+    - mysql-client-5.6
 
 
 # Apparently caching is disabled, since we used modern build platform
@@ -21,7 +18,7 @@ addons:
 #    - tmp/cache
 
 services:
-  - mariadb
+  - mysql
 
 before_install:
   - "sudo apt-get -qq update"
