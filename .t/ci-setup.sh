@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/usr/local/musl/bin:/home/travis
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/home/travis
 
 #save the current dir for later
 #ORIG_PWD=$PWD
