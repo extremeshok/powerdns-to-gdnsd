@@ -10,7 +10,6 @@ addons:
     - mysql-client-core-5.6
     - mysql-client-5.6
 
-
 # Apparently caching is disabled, since we used modern build platform
 #Enable Caching
 #cache:
@@ -24,6 +23,7 @@ before_install:
   - "sudo apt-get -qq update"
   - "sudo apt-get install mysql-client-5.6"
   - "mysql -e 'CREATE DATABASE IF NOT EXISTS powerdns character set utf8;'"
+  - "mysql -e 'CREATE USER powerdns;'"
   - "mysql -e 'GRANT ALL ON powerdns.* TO powerdns@% IDENTIFIED BY 8wksjehkaj;'"
   - "mysql -e 'FLUSH PRIVILEGES;'"
 
