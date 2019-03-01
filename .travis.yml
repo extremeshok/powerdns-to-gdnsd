@@ -22,7 +22,7 @@ services:
 before_install:
   - sudo apt-get -qq update
   - sudo apt-get install -y mysql-client-5.6
-  - mysql -e "CREATE DATABASE IF NOT EXISTS 'powerdns' character set utf8;"
+  - mysql -e "CREATE DATABASE IF NOT EXISTS `powerdns`;"
   - mysql -e "CREATE USER 'powerdns'@'localhost' IDENTIFIED BY '8wksjehkaj';"
   - mysql -e "GRANT ALL PRIVILEGES ON powerdns.* TO 'powerdns'@'localhost';"
   - mysql -e "FLUSH PRIVILEGES;"
@@ -36,13 +36,13 @@ before_install:
 
 
 install:
-  - "sudo which mysql"
-  - "sudo sh -e .t/ci-setup.sh"
-  - "sudo mkdir -p /etc/powerdns/pdns.d"
-  - "sudo cp -f .t/tests/powerdns/gmysql.conf /etc/powerdns/pdns.d/pdns.local.gmysql.conf"
+  - sudo which mysql
+  - sudo sh -e .t/ci-setup.sh
+  - sudo mkdir -p /etc/powerdns/pdns.d
+  - sudo cp -f .t/tests/powerdns/gmysql.conf /etc/powerdns/pdns.d/pdns.local.gmysql.conf
 
 script:
-  - "sudo sh -e .t/ci-test.sh"
+  - sudo sh -e .t/ci-test.sh
 
 addons:
  code_climate:
